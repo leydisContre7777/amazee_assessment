@@ -1,0 +1,134 @@
+fonts-exo2:
+  license:
+    name: SIL Open Font License, 1.1
+    url: http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
+  css:
+    theme:
+      //fonts.googleapis.com/css?family=Exo+2:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,latin-ext: { type: external }
+
+fonts-open-sans:
+  license:
+    name: SIL Open Font License, 1.1
+    url: http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
+  css:
+    theme:
+      //fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese: { type: external }
+
+font-awesome:
+  version: 4.7.0
+  css:
+    component:
+      vendor/font-awesome/css/font-awesome.min.css: {}
+
+bootstrap:
+  version: v3.3.7
+  css:
+    theme:
+      vendor/bootstrap-amazee/css/bootstrap.min.css: {}
+  js:
+    vendor/bootstrap-amazee/js/bootstrap.min.js: {}
+
+propeller:
+  version: VERSION
+  css:
+    theme:
+      vendor/propeller/css/propeller.css: {}
+  js:
+    vendor/propeller/js/propeller.min.js: {}
+  dependencies:
+    - core/jquery
+
+propeller-select-2:
+  version: VERSION
+  css:
+    theme:
+      http://propeller.in/components/select2/css/select2.min.css: {}
+      http://propeller.in/components/select2/css/select2-bootstrap.css: {}
+      http://propeller.in/components/typography/css/typography.css: {}
+      http://propeller.in/components/select2/css/pmd-select2.css: {}
+  js:
+    http://propeller.in/components/select2/js/select2.full.js: {}
+    http://propeller.in/components/select2/js/pmd-select2.js: {}
+
+font-awesome:
+  version: 4.7.0
+  css:
+    component:
+      vendor/font-awesome/css/font-awesome.min.css: {}
+
+wow:
+  version: VERSION
+  js:
+    vendor/wowjs/wow.min.js: {}
+
+animate:
+  version: VERSION
+  css:
+    component:
+      vendor/animate/animate.css: {}
+
+swiper:
+  version: VERSION
+  css:
+    theme:
+      vendor/swiper/css/swiper.min.css: {}
+  js:
+    vendor/swiper/js/swiper.min.js: {}
+  dependencies:
+    - core/jquery
+
+amazee-library:
+  version: VERSION
+  css:
+    theme:
+      css/style.css: {}
+  js:
+    js/base/main.js: {}
+    js/base/facebook.js: {}
+    js/base/swiper-config.js: {}
+    js/base/wow-config.js: {}
+    js/base/audio-player.js: {}
+    js/components/quotes.js: {}
+  dependencies:
+    - core/jquery
+    - amazee/jquery_workaround
+    - amazee/bootstrap
+    - amazee/propeller
+    - amazee/font-awesome
+    - amazee/fonts-open-sans
+    - amazee/swiper
+    - amazee/animate
+    - amazee/wow
+
+maintenance_page:
+  version: VERSION
+  css:
+    theme:
+      css/maintenance/maintenance-page.css: {}
+  dependencies:
+    - system/maintenance
+
+jquery_workaround:
+  version: VERSION
+  js:
+    js/base/jquery.workaround.js: {}
+  dependencies:
+    - core/jquery
+webform_titles:
+  version: VERSION
+  js:
+    js/base/wfwz.js: {}
+  dependencies:
+    - core/jquery
+react:
+  version: 1.x
+  header: true
+  js:
+    https://unpkg.com/react@16/umd/react.production.min.js: { external: true, minified: true }
+    https://unpkg.com/react-dom@16/umd/react-dom.production.min.js: { external: true, minified: true }
+    https://unpkg.com/babel-standalone@6.15.0/babel.min.js: { external: true, minified: true }
+react-app:
+  version: 1.0.0
+  footer: true
+  js:
+    js/react-front.js: { preprocess: 0, attributes: { type: text/babel } }

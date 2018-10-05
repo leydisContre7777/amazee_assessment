@@ -1,0 +1,4 @@
+amazee_assessment_example.simple_form:
+  title: Amazee Assessment Form Example
+  description: Demonstration of Math Parser.
+  route_name: amazee_assessment_example.simple_form

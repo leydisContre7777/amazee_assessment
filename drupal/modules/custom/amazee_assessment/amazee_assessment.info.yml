@@ -1,0 +1,14 @@
+name: Amazee Test
+type: module
+description: Amazee Test Assessment.
+package: Development
+# core: 8.x
+dependencies:
+  - drupal:graphql
+  - drupal:graphql_twig
+
+# Information added by Drupal.org packaging script on 2017-04-20
+version: '8.x-1.0'
+core: '8.x'
+project: 'amazee_assessment'
+datestamp: 1538409702

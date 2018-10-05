@@ -1,0 +1,8 @@
+
+<header data-toggle="header" class="header" role="banner" aria-label="{{ 'Site header'|t }}">
+    {% if page.navbar %}
+        <div class="header__navbar">
+            {% include directory ~ "/templates/layout/landing-pages/navbar.html.twig" %}
+        </div>
+    {% endif %}
+</header>

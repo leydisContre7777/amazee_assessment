@@ -1,0 +1,22 @@
+<?php
+
+/**
+* Implements hook_theme().
+*/
+function amazee_assessment_example_theme() {
+	
+	$theme = array(
+		'show_result_expression' => array(
+			'variables' =>
+				[
+					'result' => NULL
+				],
+			'template' => 'show-result-expression'
+		)
+	);
+
+	return $theme;
+}
+
+
+

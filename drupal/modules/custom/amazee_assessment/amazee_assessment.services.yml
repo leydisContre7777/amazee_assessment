@@ -1,0 +1,4 @@
+services:
+  plugin.manager.amazee_assessment_lexer:
+    class: Drupal\amazee_assessment\AmazeeAssessmentLexerManager
+    parent: default_plugin_manager

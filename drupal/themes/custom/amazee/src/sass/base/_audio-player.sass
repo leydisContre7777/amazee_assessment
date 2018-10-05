@@ -1,0 +1,43 @@
+
+.audio-player
+  background: $color_white
+  border: 1px solid $color_content
+  width: auto
+  text-align: center
+  display: flex
+  flex-flow: row
+  margin: 0
+  .player-controls
+    align-items: center
+    justify-content: center
+    margin-top: 1.5rem
+    flex: 3
+    progress
+      width: 90%
+    progress[value]
+      -webkit-appearance: none
+      appearance: none
+      background-color: $color_white
+      color: $color_pink
+      height: 5px
+    progress[value]::-webkit-progress-bar
+      background-color: $color_white
+      border-radius: 2px
+      border: 1px solid $color_content
+      color: $color_pink
+    progress::-webkit-progress-value
+      background-color: $color_pink
+    p
+      font-size: 1.1rem
+      margin: 0
+  #play-btn
+    background-image: url('../images/icon/play-button.svg')
+    background-size: cover
+    -o-background-size: cover
+    -moz-background-size: cover
+    -webkit-background-size: cover
+    width: 75px
+    height: 75px
+    margin: 2rem 0 2rem 2rem
+    &.pause
+      background-image: url('../images/icon/pause.svg')

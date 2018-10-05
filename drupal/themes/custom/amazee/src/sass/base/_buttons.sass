@@ -1,0 +1,146 @@
+
+.page
+  a
+    &.btn
+      color: $color_white
+      text-transform: none
+
+      &:hover,
+      &:active,
+      &:focus
+        color: $color_white
+        text-decoration: none
+
+.btn
+  color: $color_white
+  background: $color_content
+  border-radius: 0
+  padding: 0.5rem 1.5rem
+
+  &.btn-blue
+    color: $color_white
+    border: 1px solid $color_one
+    background: $color_one
+
+  &.btn-pink
+    color: $color_white
+    border: 1px solid $color_pro
+    background: $color_pro
+
+  &.btn-pink-no-border
+    color: $color_white
+    background: $color_pro
+
+  &.btn-green
+    color: $color_white
+    border: 1px solid $color_enterprise
+    background: $color_enterprise
+
+  &.btn-header
+    text-transform: inherit
+    text-decoration: underline
+
+  &.btn-personal-area
+    text-align: center
+    text-transform: inherit
+    text-decoration: underline
+    display: block
+    background: $color_icon_footer
+
+  &.btn-blue:hover,
+  &.btn-blue:focus,
+  &.btn-blue:active
+    color: $color_one!important
+    background: transparent
+
+  &.btn-pink:hover,
+  &.btn-pink:focus,
+  &.btn-pink:active
+    color: $color_pro!important
+    background: transparent
+
+  &.btn-green:hover,
+  &.btn-green:focus,
+  &.btn-green:active
+    color: $color_enterprise!important
+    background: transparent
+
+  &.btn-header:hover,
+  &.btn-header:focus,
+  &.btn-header:active
+    color: $color_pink
+    background: transparent
+
+  &.btn-pink-no-border:hover,
+  &.btn-pink-no-border:focus,
+  &.btn-pink-no-border:active
+    color: $color_white
+    background: $color_icon_footer
+
+  &.btn-video
+    margin: auto
+    display: block
+    background: 0
+    width: 12.5rem
+    height: 3rem
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    position: absolute
+    z-index: 1
+    svg
+      margin: 0 0.2rem -0.5rem
+      display: inline-block
+      width: 30px
+      height: 30px
+      path
+        fill: $color_white
+
+  &.btn-video:hover,
+  &.btn-video:focus,
+  &.btn-video:active
+    color: $color_pink
+    background: transparent
+    path
+      fill: $color_pink
+
+  &.pmd-btn-amazee:hover,
+  &.pmd-btn-amazee:focus,
+  &.pmd-btn-amazee:active
+    background: $color_pink
+
+.btn.focus,
+.btn:focus,
+.btn:hover
+  color: $color_white
+  background: $color_pink
+  border-radius: 0
+
+.pmd-card-actions
+  .btn
+    padding: 0.5rem 1.5rem
+    margin-bottom: 0
+
+    &.pmd-btn-flat
+      color: $color_content
+      border-radius: 0
+
+    &.btn-primary:hover,
+    &.btn-primary:focus,
+    &.btn-primary:active,
+    &.btn-primary.active
+      color: $color_pink
+      background-color: transparent
+
+    &.pmd-btn-amazee:hover,
+    &.pmd-btn-amazee:focus,
+    &.pmd-btn-amazee:active
+      color: $color_white
+      background: $color_pink
+
+    &.btn-pink-no-border:hover,
+    &.btn-pink-no-border:focus,
+    &.btn-pink-no-border:active
+      color: $color_white
+      background: $color_icon_footer

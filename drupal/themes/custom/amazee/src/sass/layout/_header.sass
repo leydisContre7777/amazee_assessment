@@ -1,0 +1,113 @@
+@import '../components/header/navbar'
+
+.header
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(158,158,158,1)
+  -moz-box-shadow: 0px 0px 5px 0px rgba(158,158,158,1)
+  box-shadow: 0px 0px 5px 0px rgba(158,158,158,1)
+
+  a
+    color: $color_white
+    padding: 1.1rem 0
+
+    &.phone
+      text-decoration: none
+
+  &__top
+    background: $color_content
+
+    .block
+      height: 3.125rem
+      position: relative
+      overflow: hidden
+
+    .last
+      a
+        float: right
+
+  &__search
+    margin: 0
+    background: $color_gray
+
+    .search-block-form
+      padding: 1rem 0 0.5rem 0
+
+    .form-group
+      width: 100%
+      position: relative
+
+      input:not(.form-checkbox):not(.form-radio):not(.form-file):not(.form-submit)
+        background-color: transparent
+        border-top: 0
+        border-left: 0
+        border-right: 0
+        border-bottom: 1px solid $color_icon_footer
+        width: 100%
+        height: 2rem
+
+    .search-form__submit
+      margin: 0
+      position: absolute
+      top: 0
+      right: 0
+
+  +bp(xs)
+    padding: 0
+
+    .first
+      .btn-header
+        text-align: left
+        padding: 1.1rem 1.1rem 1.1rem 0
+        display: block
+
+    .btn-personal-area
+      text-align: right
+      padding: 1.1rem 0 1.1rem 1.1rem
+      background: transparent
+
+  +bp(sm)
+    .btn-personal-area
+      text-align: center
+
+  &__navbar
+    .logo
+      padding: 0
+      display: block
+      position: relative
+      z-index: 1
+      .navbar-brand
+        width: 14rem
+        height: auto
+        padding: 1rem 0
+
+    a
+      color: $color_content
+
+  &.fix-top
+    margin: 0 0 4rem
+
+    [data-toggle="header-menu"]
+      top: auto
+      right: 0
+      left: 0
+      z-index: 1
+      -webkit-box-shadow: 0 0 5px 0 #9e9e9e
+      -moz-box-shadow: 0 0 5px 0 #9e9e9e
+      box-shadow: 0 0 5px 0 #9e9e9e
+      transition: all ease-in-out .5s
+      -moz-transition: all ease-in-out .5s
+      -ms-transition: all ease-in-out .5s
+      -o-transition: all ease-in-out .5s
+      -webkit-transition: all ease-in-out .5s
+
+      &.navbar-top
+        position: absolute
+
+      &.navbar-fix
+        display: block
+        box-sizing: border-box
+        position: fixed
+        top: 0
+        z-index: 505
+
+      //.navbar--amazee
+      //  background: rgba(255, 255, 255, 0.7)

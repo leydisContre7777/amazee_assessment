@@ -1,0 +1,75 @@
+
+.node
+  &__type-service
+
+    .pmd-z-depth
+      &:hover,
+      &:active,
+      &:focus
+        box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23)
+        -webkit-box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23)
+        -moz-box-shadow: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23)
+        border: 1px solid $color_dark_gray
+
+    .pmd-card-blue
+      border: 1px solid $color_one
+
+      .pmd-card-title
+        color: $color_one
+
+    .pmd-card-pink
+      border: 1px solid $color_pro
+
+      .pmd-card-title
+        color: $color_pro
+
+    .pmd-card-green
+      border: 1px solid $color_enterprise
+
+      .pmd-card-title
+        color: $color_enterprise
+
+    .pmd-card-title
+      text-align: center
+      span
+        padding: 0 1rem 0.4rem
+        border-bottom: 1px solid $color_dark_gray
+
+    .pmd-card-body
+      .description
+        text-align: center
+        font-weight: 600
+        padding: 0 0 1rem
+
+      .feature-service
+        list-style-type: none
+        -webkit-margin-before: 0
+        -webkit-margin-after: 0
+        -webkit-margin-start: 0
+        -webkit-margin-end: 0
+        -webkit-padding-start: 0
+
+        li
+          padding: 0 0 0.5rem 1.5rem
+          position: relative
+
+          &:before
+            color: $color_pink
+            content: "\f101"
+            display: inline-block
+            font: normal normal normal 14px/1 FontAwesome
+            font-size: inherit
+            text-rendering: auto
+            -webkit-font-smoothing: antialiased
+            -moz-osx-font-smoothing: grayscale
+            position: absolute
+            top: 0.25rem
+            left: 0
+
+    .pmd-card-actions
+      .btn
+        text-align: center
+        margin: 0 auto 1.5rem
+        display: block
+        width: 10rem
+

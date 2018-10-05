@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+<form{{ attributes }}>
+
+    <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
+        <div class="pmd-card-body">
+            <div class="row">
+                <div class="col-lg-4 col-sm-4 col-xs-12">
+                    {{ element.name }}
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-12">
+                    {{ element.mail }}
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-12">
+                    {{ element.subject }}
+                </div>
+                <div class="col-md-12">
+                    {{ element.message }}
+                    {{ element.field_your_phone_number }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
+        <div class="pmd-card-actions">
+            <div class="row">
+                {{ element.form_id }}
+                {{ element.form_build_id }}
+                {{ element.form_token }}
+                {{ element.fields_uid }}
+                {{ element.fields_created}}
+
+                <div class="col-md-12">
+                    {{ element.captcha }}
+                    {{ element.actions.submit }}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

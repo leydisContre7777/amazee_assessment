@@ -1,0 +1,28 @@
+@mixin bp($point)
+  @if $point == lg
+    @media all and (min-width: 1200px) { @content }
+  @else if $point == md
+    @media all and (min-width: 992px) { @content }
+  @else if $point == sm
+    @media all and (min-width: 768px) { @content }
+  @else if $point == xs
+    @media all and (max-width: 768px) { @content }
+  @else if $point == xxs
+    @media all and (max-width: 640px) { @content }
+
+
+//@mixin breakpoint($point) {
+//  @if $point == desktop {
+//    @media (min-width: 1200px) { @content ; }
+//  }
+//  @else if $point == laptop {
+//    @media (min-width: 992px) { @content ; }
+//  }
+//  @else if $point == tablet {
+//    @media (min-width: 768px) { @content ; }
+//  }
+//  @else if $point == mobile {
+//    @media (max-width: 768px)  { @content ; }
+//
+//  }
+//}

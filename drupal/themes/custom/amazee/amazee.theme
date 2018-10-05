@@ -1,0 +1,362 @@
+<?php
+/**
+ * @file
+ * Functions to support theming in the amazee theme.
+ */
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Template\Attribute;
+use Drupal\taxonomy\Entity\Term;
+
+function amazee_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+    // If on an individual node page, add the node type to theme suggestions.
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+        $first_suggestion = array_shift($suggestions);
+        array_unshift($suggestions, 'page__node__' . $node->bundle());
+        if ($first_suggestion) {
+            array_unshift($suggestions, $first_suggestion);
+        }
+        if (in_array('page__node__edit', $suggestions)) {
+            $suggestions[] = 'page__node__edit__' . $node->bundle();
+        }
+    }
+    if (\Drupal::routeMatch()->getRouteName() == 'entity.taxonomy_term.canonical' && $tid = \Drupal::routeMatch()->getRawParameter('taxonomy_term')) {
+        $term = Term::load($tid);
+        $suggestions[] = 'page__taxonomy__' . $term->getVocabularyId();
+    }
+    // Templates for error pages
+    $http_error_suggestions = [
+        'system.401' => 'page__401',
+        'system.403' => 'page__403',
+        'system.404' => 'page__404',
+    ];
+    $node = \Drupal::request()->attributes->get('node');
+    if ($node) {
+        if ($node->id() == 2 ) {
+            $suggestions[] = $http_error_suggestions['system.404'];
+        }
+        if ($node->id() == 3 ) {
+            $suggestions[] = $http_error_suggestions['system.403'];
+        }
+    }
+}
+
+/**
+ * Implements template_preprocess_html().
+ *
+ * Search the head elements for the Favicon and remove it.
+ * See: http://realfavicongenerator.net/faq#why_ico_not_declared.
+ */
+
+function amazee_page_attachments_alter(array &$attachments) {
+    $unneeded_meta = ['HandheldFriendly', 'MobileOptimized', 'system_meta_generator'];
+    foreach ($attachments['#attached']['html_head'] as $id => $attachment) {
+        if (in_array($attachment[1], $unneeded_meta)) {
+            unset($attachments['#attached']['html_head'][$id]);
+        }
+    }
+    $viewport = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1',
+        ),
+    );
+    $attachments['#attached']['html_head'][] = [$viewport, 'viewport'];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for form_element templates.
+ */
+function amazee_template_preprocess_form_element(&$variables) {
+    $element = $variables['element'];
+    // Get the title
+    if (isset($element['#title']) && $element['#title'] !== '') {
+        $variables['title'] = ['#markup' => $element['#title']];
+    }
+    // Modify the label variable
+    if (!empty($element['#type']) && in_array($element['#type'], array('checkbox', 'radio'))) {
+        // Set the label variable to just the title for checkbox and radio inputs
+        $variables['label'] = $variables['title'];
+    } else {
+        // Use default label rendering for any other inputs
+        $variables['label'] = array('#theme' => 'form_element_label');
+        $variables['label'] += array_intersect_key($element, array_flip(array('#id', '#required', '#title', '#title_display')));
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+function amazee_preprocess_page_title(&$variables) {
+    if (!empty($variables['title_suffix']['add_or_remove_shortcut']) && $variables['title']) {
+        $variables['title_prefix']['shortcut_wrapper'] = [
+            '#markup' => '<div class="shortcut-wrapper clearfix">',
+            '#weight' => 100,
+        ];
+        $variables['title_suffix']['shortcut_wrapper'] = [
+            '#markup' => '</div>',
+            '#weight' => -99,
+        ];
+        $variables['title_suffix']['add_or_remove_shortcut']['#weight'] = -100;
+    }
+
+    //altering webform wizard page title
+    $route = \Drupal::routeMatch();
+    if ($route->getRouteName() == 'entity.webform.canonical') {
+
+        $webform = $route->getParameter('webform');
+        if ($webform->hasWizardPages()) {
+
+            $submission = $webform->getSubmissionForm();
+            $pages = $webform->getPages();
+            $current_page = $submission['progress']['#current_page'];
+            $progress = array_keys($pages);
+            $page = \Drupal::request()->query->get('page');
+
+            if ($page) {
+                $variables['title'] = $pages[$page]['#title'];
+            }
+        }
+
+        $variables['#attached']['library'][] = 'amazee/webform_titles';
+        $variables['#attached']['drupalSettings']['get_page'] = $page;
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for maintenance-page.html.twig.
+ */
+function amazee_preprocess_maintenance_page(&$variables) {
+    if (!$variables['db_is_active']) {
+        $variables['site_name'] = '';
+    }
+    $variables['#attached']['library'][] = 'amazee/maintenance_page';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ */
+function amazee_preprocess_node(&$variables) {
+    if ($variables['teaser'] || !empty($variables['content']['comments']['comment_form'])) {
+        unset($variables['content']['links']['comment']['#links']['comment-add']);
+    }
+    if($variables['node']->getType() === 'document') {
+        amazee_preprocess_file_node($variables);
+    }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+
+function amazee_theme_suggestions_taxonomy_term_alter(&$suggestions, $variables) {
+    $elements = $variables['elements'];
+    if (isset($elements['#taxonomy_term']) && isset($elements['#theme']) && isset($elements['#view_mode'])) {
+        $term = $elements['#taxonomy_term'];
+        if (is_object($term)) {
+            $suggestions[] = $elements['#theme'] . '__' . $term->getVocabularyId() . '__' . $elements['#view_mode'];
+            $suggestions[] = $elements['#theme'] . '__' . $term->id() . '__' . $elements['#view_mode'];
+        }
+    }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form_element templates.
+ */
+function amazee_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook) {
+    if (isset($variables['element']['#name'])) {
+        $suggestions[] = 'form_element__' . explode("[", $variables['element']['#name'])[0];
+    }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ */
+function amazee_theme_suggestions_form_alter(array &$suggestions, array $variables, $hook) {
+    if (isset($variables['element']['#form_id'])) {
+        $suggestions[] = 'form__' . explode("[", $variables['element']['#form_id'])[0];
+    }
+    if ($variables['element']['#form_id'] == 'search_block_form') {
+        $suggestions[] = 'form__search_block_form';
+    }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for input templates.
+ * @param $suggestions
+ * @param array $variables
+ * @param string $hook
+ */
+function amazee_theme_suggestions_input_alter(&$suggestions, array $variables) {
+    $element = $variables['element'];
+
+    if (isset($element['#attributes']['data-twig-suggestion'])) {
+        $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
+    }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for input templates.
+ * @param array $suggestions
+ * @param array $variables
+ * @param string $hook
+ */
+function amazee_theme_suggestions_bef_checkboxes_alter(array &$suggestions, array $variables, $hook) {
+  if (isset($variables['element']['#name'])) {
+    $suggestions[] = 'bef_checkboxes__' . explode("[", $variables['element']['#name'])[0];
+  }
+}
+
+
+/**
+ * Implements hook_form_alter() to add classes to the search form.
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ *
+ */
+function amazee_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+    if (in_array($form_id, ['search_block_form', 'search_form'])) {
+        $key = ($form_id == 'search_block_form') ? 'actions' : 'basic';
+        if (!isset($form[$key]['submit']['#attributes'])) {
+            $form[$key]['submit']['#attributes'] = new Attribute();
+        }
+        $form[$key]['submit']['#attributes']->addClass('search-form__submit');
+    }
+    if ($form['#id'] == 'views-exposed-form-search-results') {
+        $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'search_results_submit';
+        $form['actions']['submit']['#attributes']['class'][] = 'search-box__button';
+    }
+    if ('search_block_form' == $form_id) {
+        $form['keys']['#attributes']['placeholder'][] = t('Search');
+    }
+}
+
+/**
+ * Merge theme settings with page variables
+ * @implements hook_preprocess_page()
+ */
+function amazee_preprocess_page(&$variables) {
+
+  if(\Drupal::currentUser()->isAnonymous()){
+    // Amazee Assessment theme settings for header components
+    $variables['amazee_header'] = theme_get_setting('amazee_header', 'amazee');
+  }else{
+    $variables['amazee_header'] = theme_get_setting('amazee_header', 'amazee');
+    $variables['amazee_header']['personal_area']['link_text'] = 'Account';
+    $variables['amazee_header']['personal_area']['link_href'] = '/user';
+  }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function amazee_theme_suggestions_views_exposed_form_alter(array &$suggestions, array $vars) {
+    // form[#id] pattern is views-exposed-form-VIEWNAME-DISPLAY
+    // We need to remove the 'views-exposed-form-' part
+    // and to replace underscores with dashes
+    $suggestions[] = 'views_exposed_form__' . str_replace(
+            ['views-exposed-form-', '-'],
+            ['', '_'],
+            $vars['form']['#id']);
+}
+
+/**
+ * Preprocess blocks of amazee theme
+ * @implements hook_preprocess_block()
+ */
+function amazee_preprocess_block(&$variables) {
+
+    if($variables['plugin_id'] === 'social_media_links_block') {
+        $variables['attributes']['class'][] = 'pull-right';
+    }
+
+    switch ($variables['base_plugin_id']) {
+        case 'system_branding_block':
+            $variables['site_logo'] = '';
+            if ($variables['content']['site_logo']['#access'] && $variables['content']['site_logo']['#uri']) {
+                $variables['site_logo'] = str_replace('.svg', '.png', $variables['content']['site_logo']['#uri']);
+            }
+            break;
+    }
+
+}
+
+/**
+ * Preprocess node from files list
+ * @param Array $variables Variables from hook_preprocess_node()
+ */
+function amazee_preprocess_file_node(&$variables) {
+    /**
+     * Node to preproccess
+     * @var Drupal\node\NodeInterface
+     */
+    $node = $variables['node'];
+    /**
+     * Attachment from node
+     * @var Drupal\file\FileInterface
+     */
+    $file = $node->get('field_file')->entity;
+
+    /**
+     * If attachment specified, then additional data
+     * should be given to template
+     */
+    if($file !== null) {
+        $additional_vars = [];
+        list (, $extension) = explode('/', $file->getMimeType());
+
+        // File extension
+        $additional_vars['file_extension'] = $extension;
+
+        // File size
+        $additional_vars['file_size'] = ($file->getSize()/1024 < 1024)
+            ? sprintf('%0.2f kb', $file->getSize()/1024)
+            : sprintf('%0.2f mb', $file->getSize()/(1024*1024));
+
+        // Merge to content
+        $variables['content'] = array_merge($variables['content'], $additional_vars);
+    }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter
+ */
+function amazee_theme_suggestions_user_alter(array &$suggestions, array $variables, $hook) {
+    $suggestions[] = $variables['theme_hook_original'] . '__' . str_replace('-', '_', $variables['elements']['#view_mode']);
+    return $suggestions;
+}
+
+/**
+ * Implements hook_preprocess_webform_progress_tracker
+ */
+function amazee_preprocess_webform_progress_tracker(array &$variables) {
+    $webform = $variables['webform'];
+    $elements = $webform->getElementsDecoded();
+    $operation = $variables['operation'];
+    $pages = $webform->getPages($operation);
+
+    // Reset the pages variable.
+    $variables['progress'] = [];
+    $i = 0;
+    foreach ($pages as $key => $page) {
+        $variables['progress'][$i] = [
+            'name' => $key,
+            'title' => (isset($page['#title'])) ? $page['#title'] : '',
+        ];
+
+        if (isset($elements[$key])) {
+            $element = $elements[$key];
+            foreach ($element as $field) {
+                if ((isset($field['#title'])) && ($field['#title'] == 'group')) {
+                    $f_class = str_replace(' ', '-', $field['#default_value']);
+                    $variables['progress'][$i]['group'] = 'group-' . strtolower($f_class);
+                    $variables['progress'][$i]['gname'] = $field['#default_value'];
+                }
+            }
+        }
+        $i++;
+    }
+}

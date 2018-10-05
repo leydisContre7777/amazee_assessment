@@ -1,0 +1,22 @@
+
+<header data-toggle="header" class="header fix-top" role="banner" aria-label="{{ 'Site header'|t }}">
+    <div class="header__top">
+        <div class="container">
+            {% include directory ~ "/templates/layout/system/header--top.html.twig" %}
+        </div>
+    </div>
+    {% if page.search %}
+        <div class="header__search">
+            <div id="headerSearch" class="collapse" aria-expanded="false">
+                <div class="container">
+                    {{ page.search }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if page.navbar %}
+        <div data-toggle="header-menu" class="header__navbar primary-navbar navbar-top">
+            {% include directory ~ "/templates/layout/system/navbar.html.twig" %}
+        </div>
+    {% endif %}
+</header>

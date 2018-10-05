@@ -1,0 +1,15 @@
+name: Amazee Assessment  Example
+type: module
+description: Demonstration of Math Parser.
+package: Development
+# core: 8.x
+
+
+dependencies:
+  - amazee_assessment:amazee_assessment
+
+
+version: '8.x-1.0'
+core: '8.x'
+project: 'amazee_assessment'
+datestamp: 1492657746

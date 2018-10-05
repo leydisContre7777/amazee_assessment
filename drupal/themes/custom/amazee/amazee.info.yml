@@ -1,0 +1,60 @@
+name: Amazee Assessment
+type: theme
+base theme: da_vinci
+description: 'Amazee Assessment'
+package: Core
+version: VERSION
+core: 8.x
+
+regions:
+  header_social_media: 'Header Social Media'
+  search: 'Search'
+  navbar: 'Navigation bar'
+  hero: 'Hero'
+
+  service: 'Service front'
+  why_use: 'Why Use'
+  makes_change_work: 'Makes change work'
+  our_books: 'Our Books'
+  front_blog: 'Main page blog'
+  why_work: 'Why work'
+  main_page_quote: 'Main page Quote'
+  social_network: 'Main page Social network'
+
+  benefits_first: 'Benefits first'
+  benefits_second: 'Benefits second'
+
+  breadcrumb: 'Breadcrumb'
+  help: 'Help'
+  page_title: 'Page title'
+
+  sidebar_first: 'Sidebar first'
+  content: 'Content'
+  rrssb: 'Social Sharing Buttons'
+  sidebar_second: 'Sidebar second'
+
+  featured_bottom_first: 'Featured bottom first'
+  featured_bottom_second: 'Featured bottom second'
+  featured_bottom_third: 'Featured bottom third'
+
+  footer_one: 'Footer One'
+  footer_two: 'Footer Two'
+  footer_three: 'Footer Three'
+  footer_four: 'Footer Four'
+  footer_bottom: 'Footer Bottom'
+  
+  modal: 'Modal'
+  
+libraries:
+  - amazee/fonts-library
+  - amazee/amazee-library
+
+stylesheets-remove:
+  - 'core/themes/classy/css/components/node.css'
+  - 'core/themes/classy/css/components/messages.css'
+  - 'core/assets/vendor/normalize-css/normalize.css'
+
+libraries-override:
+  system/base: false
+  classy/base: false
+  da_vinci/global-css: false

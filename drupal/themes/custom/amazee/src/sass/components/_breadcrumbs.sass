@@ -1,0 +1,23 @@
+
+.breadcrumb
+  margin: 1rem 0 0
+  background-color: transparent
+  .breadcrumb-item
+    &:before
+      color: $color_content
+      padding: 0 0 0 5px
+    a
+      text-decoration: underline
+      &:hover,
+      &:active,
+      &:focus
+        text-decoration: underline
+
+
++bp(xs)
+  .breadcrumb
+    text-overflow: ellipsis
+    -o-text-overflow: ellipsis
+    white-space: nowrap
+    position: relative
+    overflow: hidden

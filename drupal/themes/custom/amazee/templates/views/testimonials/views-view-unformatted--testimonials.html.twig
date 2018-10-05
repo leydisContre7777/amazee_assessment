@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Theme override to display a slider of quotes or a single quote
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+{%
+    set view_display_id = view.id ~ '-' ~ view.current_display
+%}
+{% if title %}
+  <h3>{{ title }}</h3>
+{% endif %}
+{#
+/**
+ * How many rows are we have?
+ * Slider should not be rendered for just one row
+ */
+#}
+    {% if rows|length == 1 %}
+        {%
+            set row_classes = [
+                default_row_class ? 'views-row',
+            ]
+        %}
+        <div{{ rows[0].attributes.addClass(row_classes) }}>
+            {{ rows[0].content }}
+        </div>
+    {% else %}
+        <div id="{{view_display_id}}" class="carousel slide testimonials-carousel" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+            {% for row in rows %}
+                <div{{ row.attributes.addClass('item '~(loop.index0 == 0 ? 'active')) }}>
+                    {{ row.content }}
+                </div>
+            {% endfor %}
+            </div>
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {% for row in rows %}
+                <li data-target="#{{view_display_id}}" data-slide-to="{{ loop.index0 }}" 
+                    class="{{loop.index0 == 0 ? 'active'}}"></li>
+                {% endfor %}
+            </ol>                
+        </div>
+    {% endif %}

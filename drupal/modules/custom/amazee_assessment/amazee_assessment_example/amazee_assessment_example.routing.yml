@@ -1,0 +1,15 @@
+amazee_assessment_example.simple_form:
+  path: '/amazee-example'
+  defaults:
+    _title: 'Amazee Assessment  Example'
+    _form: '\Drupal\amazee_assessment_example\Form\SimpleForm'
+  requirements:
+    _permission: 'access content'
+amazee_assessment_example.manage:
+  path: '/amazee-example/result/{result}'
+  defaults:
+    _controller: '\Drupal\amazee_assessment_example\Controller\AmazeeExampleController::showResult'
+    _title: 'Result Mathematical Expression'
+  requirements:
+    _permission: 'access content'
+

@@ -1,0 +1,20 @@
+uuid: defabd29-bced-4522-9096-40f040be3100
+langcode: en
+status: true
+dependencies:
+  theme:
+    - ocai
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: ocai_local_actions
+theme: ocai
+region: content
+weight: -20
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

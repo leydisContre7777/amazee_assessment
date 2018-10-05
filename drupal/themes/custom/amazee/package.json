@@ -1,0 +1,32 @@
+{
+  "name": "amazee",
+  "version": "1.0.0",
+  "description": "amazee Online Drupal Theme",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "gulp sass",
+    "sass-dev": "gulp sass-watch",
+    "vendors": "gulp vendors",
+    "build": "npm run vendors && npm run sass"
+  },
+  "author": "amazee",
+  "license": "ISC",
+  "devDependencies": {
+    "bluebird": "^3.5.1",
+    "bootstrap": "^3.3.7",
+    "propellerkit": "^1.1.0",
+    "swiper": "^4.0.7",
+    "wowjs": "^1.1.3",
+    "font-awesome": "^4.7.0",
+    "fs-extra": "^4.0.2",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-copy": "^1.0.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sass-glob": "^1.0.8",
+    "gulp-sourcemaps": "^2.6.1"
+  }
+}

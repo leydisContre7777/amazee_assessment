@@ -1,0 +1,16 @@
+{#graphql
+query($node: String!) {
+  node:nodeById(id: $node) {
+    title:entityLabel
+    ... on NodeArticle {
+      body {
+        processed
+      }
+    }
+  }
+}
+#}
+<h1>{{ graphql.node.title }}</h1>
+{% if graphql.node.body %}
+    <div class="body"><h3>{{ graphql.node.body.processed | raw  }}</h3></div>
+{% endif %}

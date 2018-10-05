@@ -1,0 +1,22 @@
+uuid: 71118a7c-c099-4453-86a6-0144e85d1455
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - amazee
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: amazee_messages
+theme: amazee
+region: header_social_media
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

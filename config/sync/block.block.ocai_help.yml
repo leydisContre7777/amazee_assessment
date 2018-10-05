@@ -1,0 +1,22 @@
+uuid: 3b0ad19a-7e03-48df-9772-e7d5148a6b7c
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - ocai
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: ocai_help
+theme: ocai
+region: content
+weight: -30
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

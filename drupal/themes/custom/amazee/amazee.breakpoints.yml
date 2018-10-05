@@ -1,0 +1,24 @@
+amazee.xs:
+  label: Mobile (Less than 768px)
+  mediaQuery: 'screen and (max-width: 768px)'
+  weight: 0
+  multipliers:
+    - 1x
+amazee.sm:
+  label: Tablets (From 768px to 992px)
+  mediaQuery: 'screen and (min-width: 768px) and (max-width: 992px)'
+  weight: 1
+  multipliers:
+    - 1x
+amazee.md:
+  label: Small desctops (From 992px to 1200px)
+  mediaQuery: 'screen and (min-width: 992px) and (max-width: 1200px)'
+  weight: 2
+  multipliers:
+    - 1x
+amazee.lg:
+  label: Large screens (From 1200px)
+  mediaQuery: 'screen and (min-width: 1200px)'
+  weight: 2
+  multipliers:
+    - 2x

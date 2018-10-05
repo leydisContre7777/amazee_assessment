@@ -1,0 +1,14 @@
+uuid: 2c638f88-2691-4358-8fda-0b59326914bf
+name: 'Amazee Test'
+mail: inglcontreras@live.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI
