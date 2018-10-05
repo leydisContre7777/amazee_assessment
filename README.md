@@ -8,7 +8,7 @@ And custom theme:
  amazee
 
 
-#Requirements
+# Requirements
 
 php 7.1
 
@@ -18,7 +18,7 @@ drush 9
 
 
 
-To the site working you need to do:
+To get the site working you need to do:
 
  # Clone the repository
 
@@ -54,7 +54,7 @@ To the site working you need to do:
 
  In the input you can enter a matemathical expression, for example: 10 + 20 - 30 + 15 * 5
 
- The application you redirect to show you the result, which contains some reactjs in the button element.
+ The application you redirect to show you the result (YOUR_DOMAIN/drupal/amazee-example/result/{result_expression}), which contains some reactjs in the button element.
 
 
  #Login into the drupal site and create an article, after the article is been saved you should see
