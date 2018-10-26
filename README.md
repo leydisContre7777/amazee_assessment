@@ -1,12 +1,6 @@
-# This is a Technical Assessment
+# This is drupal 8 custom module
 
-This is a drupal site that contains a custom module:
- amazee_assessment
-
-
-And custom theme:
- amazee
-
+Here you can find a lexer parser for  drupal 8
 
 # Requirements
 
@@ -14,7 +8,6 @@ php 7.1
 
 LAMP
 
-drush 9
 
 
 
@@ -24,28 +17,6 @@ To get the site working you need to do:
 
  git clone git@github.com:leydisContre7777/amazee_assessment.git
 
- # Install all dependencies with composer
-
- cd drupal
- composer install
-
-
- # Create an empty database and import all the configuration files
-
- Create a sites/default/settings.php file and this line at the end:
-
- $config_directories['sync'] = '../config/sync';
-
-
- create a mysql database
-
- Import the configuration files using drush
-
- cd drupal
-
- drush cim
-
- drush cr
 
 
  # See the application working
