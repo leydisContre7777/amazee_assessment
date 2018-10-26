@@ -32,3 +32,4 @@ nbproject
 .DS_Store
 drupal/sites/default/services.yml
 
+package-lock.json
